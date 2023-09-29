@@ -30,7 +30,7 @@ module.exports.createNote = async (event, context, cb) => {
 
 module.exports.updateNote = async (event, context, cb) => {
   let notesId = event.pathParameters.id;
-  console.log(notesId);
+  
   let data = JSON.parse(event.body);
   try {
     const params = {
@@ -57,7 +57,7 @@ module.exports.updateNote = async (event, context, cb) => {
 
 module.exports.deleteNote = async (event, context, cb) => {
   let notesId = event.pathParameters.id;
-  console.log(notesId);
+  
   try {
     const params = {
       TableName: NOTES_TABLE_NAME,
@@ -67,7 +67,6 @@ module.exports.deleteNote = async (event, context, cb) => {
     await documentClient.delete(params).promise();
     cb(null, send(200, notesId));
   } catch (err) {
-    console.log(err);
     cb(null, send(500, err.message));
   }
 };
